@@ -1,0 +1,24 @@
+.navbar{
+    height: 50px;
+    background-color: yellowgreen
+    ;
+    display: flex;
+    width: 100%;
+    justify-content: center;    
+}
+.navContainer{
+    background-color: yellowgreen;
+    width: 1080px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+}
+.navButton{
+    margin-left: 10px;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
