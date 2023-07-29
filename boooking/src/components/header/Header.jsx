@@ -16,7 +16,7 @@ import "./header.css"
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns"
-export const Header = () => {
+export const Header = ({typeo}) => {
     const [opendate,setopenDate]=useState(false);
     const [show,showOption]=useState(false);
     const[options,setOptions]=useState({
@@ -25,6 +25,16 @@ export const Header = () => {
         room:0
 
     })
+    const handleOption=(type,sign)=>{
+        setOptions((prev)=>{
+            return{
+                ...prev,
+                [type]:sign==='i'?prev[type]+1: prev[type]-1,
+            }
+        }
+ //(type:sign) You cannot access an object property using dot notation when the property name is stored in a variable (type in this case). Instead, you should use square brackets to access the property dynamically.
+        );
+    };
   
     const [date, setDate] = useState([
         {
@@ -58,7 +68,7 @@ export const Header = () => {
                         <span>Airport taxis</span>
                     </div>
                 </div>
-                <h1 className='headerTitle'>Discover Comfort and Savings in Every Stay</h1>
+                { typeo !== "list" &&<><h1 className='headerTitle'>Discover Comfort and Savings in Every Stay</h1>
                 <p className='headerDescription'>Welcome to our luxurious hotel, where comfort meets affordability. Enjoy a lavish stay at our well-appointed rooms and indulge in top-notch amenities. And the best part? Unbelievable discounts await you, making your dream vacation a reality</p>
                 <button className='headerbutton'>Sign in/Register</button>
                 <div className='headersearch'>
@@ -83,32 +93,32 @@ export const Header = () => {
                     <div className='headerSearchitem'>
                         <FontAwesomeIcon icon={faPerson} />
                         <span  onClick={()=>{ showOption(!show) }}className='Headsearchtext'>{`Adult ${options.adult} child ${options.children} room ${options.room} `}</span>
-                       { show && <div className='options'>
+                       { show &&( <div className='options'>
                             <div className='optionsitem'>
                                 <span className='optiontext'>Adult</span>
                                 <div className='signcon'>
-                                <button className='optcounterbutton'>+</button>
-                                <span className='showOptionnumber'>1</span>
-                                <button className='optcounterbutton'>-</button></div>
+                                <button className='optcounterbutton' onClick={()=>handleOption("adult",'i')}  >+</button>
+                                <span className='showOptionnumber'>{`${options.adult}`}</span>
+                                <button onClick={()=>handleOption("adult",'d')} disabled={options.adult<=1}className='optcounterbutton'>-</button></div>
                             </div>
                             <div className='optionsitem'>
                                 <span className='optiontext'>children</span>
                                 <div className='signcon'>
-                                <button className='optcounterbutton'>+</button>
-                                <span className='showOptionnumber'>1</span>
-                                <button className='optcounterbutton'>-</button></div>
+                                <button onClick={()=>handleOption("children",'i')} className='optcounterbutton'>+</button>
+                                <span className='showOptionnumber'>{`${options.children}`}</span>
+                                <button onClick={()=>handleOption("children",'d')} disabled={options.children<=0}className='optcounterbutton'>-</button></div>
                             </div>
                             <div className='optionsitem'>
                                 <span className='optiontext'>room</span>
                                 <div className='signcon'>
-                                <button className='optcounterbutton'>+</button>
-                                <span className='showOptionnumber'>1</span>
-                                <button className='optcounterbutton'>-</button></div>
+                                <button onClick={()=>handleOption("room",'i')} className='optcounterbutton'>+</button>
+                                <span className='showOptionnumber'>{`${options.room}`}</span>
+                                <button onClick={()=>handleOption("room",'d')} disabled={options.room<=1} className='optcounterbutton'>-</button></div>
                             </div>
-                        </div> }
+                        </div>) }
                     </div>
                     <button className='headersearchitembtn'>Search</button>
-                </div>
+                </div></>}
             </div>
         </div>
     )
