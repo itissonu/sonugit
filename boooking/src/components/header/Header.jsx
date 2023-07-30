@@ -16,15 +16,35 @@ import "./header.css"
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns"
+import { useNavigate } from "react-router-dom";
 export const Header = ({typeo}) => {
     const [opendate,setopenDate]=useState(false);
     const [show,showOption]=useState(false);
+    const[searchtext,setsearchtext]=useState("");   //which place you want to search 
+    const [date, setDate] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
+        }
+    ]);                                                 //for date range
+
     const[options,setOptions]=useState({
         adult:1,
         children:0,
-        room:0
+        room:1
 
     })
+    const navigate=useNavigate();
+    const searchHandle =()=>{
+navigate("/hotels",{state:{searchtext,options,date}});
+    }
+
+    const handleplace= (e)=>{
+        setsearchtext(
+           e.target.value
+        );
+    }
     const handleOption=(type,sign)=>{
         setOptions((prev)=>{
             return{
@@ -36,13 +56,7 @@ export const Header = ({typeo}) => {
         );
     };
   
-    const [date, setDate] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: 'selection'
-        }
-    ]);
+  
     return (
         <div className='header'>
             <div className='headContainer'>
@@ -74,11 +88,12 @@ export const Header = ({typeo}) => {
                 <div className='headersearch'>
                     <div className='headerSearchitem'>
                         <FontAwesomeIcon icon={faBed} />
-                        <input type='text ' placeholder='where are you going' className='Headsearchinput' />
+                        <input type='text ' placeholder='where are you going' value={searchtext}  onChange={handleplace}className='Headsearchinput' />
                     </div>
                     <div className='headerSearchitem'>
                         <FontAwesomeIcon icon={faCalendarDays} />
-                        <span  onClick={()=>  setopenDate(!opendate)} className='Headsearchtext'>
+                        <span  onClick={()=>  setopenDate(!opendate)} 
+                        className='Headsearchtext'>
                         {`${format(date[0].startDate,"MM/dd/yyyy")} to ${format(date[0].endDate,"MM/dd/yyyy")}`} 
                         </span>
                        {opendate && (<DateRange 
@@ -117,7 +132,7 @@ export const Header = ({typeo}) => {
                             </div>
                         </div>) }
                     </div>
-                    <button className='headersearchitembtn'>Search</button>
+                    <button className='headersearchitembtn' onClick={searchHandle}>Search</button>
                 </div></>}
             </div>
         </div>
