@@ -1,45 +1,35 @@
 import React from 'react'
 import './property.css'
+import useFetch from '../../hooks/useFetchdata';
 export const Property = () => {
+    const { data, err, load } = useFetch("http://localhost:8000/api/hotels/typecount")
+   
+    const imagesArray = [
+        { src: 'https://images.freeimages.com/images/large-previews/b6b/hotel-room-1217627.jpg' },
+        { src: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80' },
+        { src: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'  },
+        { src: 'https://plus.unsplash.com/premium_photo-1681922761181-ee59fa91edc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
+        { src: 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80' },
+      ];
+      
   return (
     <div>
         <div className='plcontainer'>
-            <div className='pllistcard'>
-                <img src='https://images.freeimages.com/images/large-previews/b6b/hotel-room-1217627.jpg' className='pllistimg'></img>
+          {data && imagesArray.map((img,i)=>{
+            return(
+          <div className='pllistcard' key={i}>
+                <img src={img.src} className='pllistimg'></img>
                 <div className='pltitle'>
-                    <h1>Hotels</h1>
-                    <h2>223 hotels</h2>
+                    <h1>{data[i]?.type}</h1>
+                    <h2>{data[i]?.count}  {data[i]?.type} </h2>
                 </div>
-            </div>
-            <div className='pllistcard'>
-                <img src='https://cdn.pixabay.com/photo/2016/11/21/15/09/apartments-1845884_1280.jpg' className='pllistimg'></img>
-                <div className='pltitle'>
-                    <h1>Apartments</h1>
-                    <h2>223 hotels</h2>
-                </div>
-            </div>
-            <div className='pllistcard'>
-                <img src='https://cdn.pixabay.com/photo/2019/09/12/15/21/resort-4471852_1280.jpg' className='pllistimg'></img>
-                <div className='pltitle'>
-                    <h1>Resorts</h1>
-                    <h2>223 hotels</h2>
-                </div>
-            </div>
-            <div className='pllistcard'>
-                <img src='https://cdn.pixabay.com/photo/2021/04/05/18/02/villa-balbiano-6154200_1280.jpg' className='pllistimg'></img>
-                <div className='pltitle'>
-                    <h1>Villas</h1>
-                    <h2>223 hotels</h2>
-                </div>
-            </div>
-            <div className='pllistcard'>
-                <img src='https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_1280.jpg' className='pllistimg'></img>
-                <div className='pltitle'>
-                    <h1>Cabins</h1>
-                    <h2>223 hotels</h2>
-                </div>
-            </div>
-        </div>
+            </div>)
+             })}
+             </div>
+            
+           
+            
+        
     </div>
   )
 }

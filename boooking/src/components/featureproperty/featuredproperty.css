@@ -9,6 +9,7 @@
     .featuredpropimg{
         width: 100%;
         object-fit: cover;
+      
     }
     .featuredpropitm{
         display: flex;

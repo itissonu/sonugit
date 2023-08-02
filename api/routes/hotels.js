@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Hotel=require('../modals/Hotel.js');
-const { createHotel, allHotel, findHotel, deleteHotel, updateHotel } = require('../controlers/hotelmethod.js');
+const { createHotel, allHotel, findHotel, deleteHotel, updateHotel, countCity, countType } = require('../controlers/hotelmethod.js');
 
 
 //create
@@ -21,9 +21,12 @@ router.put('/:id', updateHotel)
 //delete endpoint
 router.delete('/:id',  deleteHotel)
 //get endpoint
-router.get('/:id',findHotel)
+router.get('/find/:id',findHotel)
 //get all endpoint
 
 router.get('/', allHotel )
+
+router.get('/countcity',countCity);
+router.get('/typecount',countType);
 
 module.exports = router;

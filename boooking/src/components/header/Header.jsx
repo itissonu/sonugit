@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react';
+
+import { useState,useContext } from 'react';
 import "./header.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -17,6 +17,7 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns"
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from '../../contex/searchContex';
 export const Header = ({typeo}) => {
     const [opendate,setopenDate]=useState(false);
     const [show,showOption]=useState(false);
@@ -36,7 +37,9 @@ export const Header = ({typeo}) => {
 
     })
     const navigate=useNavigate();
+    const {dispatch}=useContext(SearchContext)
     const searchHandle =()=>{
+        dispatch({type:"NEW_SEARCH",payload:{searchtext,date,options}});
 navigate("/hotels",{state:{searchtext,options,date}});
     }
 

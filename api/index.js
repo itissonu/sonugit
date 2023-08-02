@@ -7,6 +7,7 @@ const hotelroute=require('../api/routes/hotels.js')
 const roomroute=require('../api/routes/rooms.js')
 const usersroute=require('../api/routes/users.js')
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const  connection = async ()=>{
 try {
@@ -22,6 +23,7 @@ const app=express();
 
 
 //middlewear
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
@@ -47,7 +49,7 @@ app.use((err, req, res, next) => {
     });
   });
 
-app.listen(3000, () => {
+app.listen(8000, () => {
     connection();
     console.log("Connected to the backend");
   });

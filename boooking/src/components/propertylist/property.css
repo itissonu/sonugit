@@ -21,7 +21,7 @@
         cursor: pointer;
     }
     .pltitle> h1{
-        
+        text-transform: capitalize;
         font-size: 18px;
       color: black;
       margin: 0px;
@@ -31,4 +31,5 @@
         font-weight: 300;
         color: black;
         margin: 0px;
+       
     }

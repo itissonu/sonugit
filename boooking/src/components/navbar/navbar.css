@@ -22,3 +22,8 @@
     border: none;
     cursor: pointer;
 }
+.logo{
+    cursor: pointer;
+    font-size: 19px;
+    font-weight: bolder;
+}
