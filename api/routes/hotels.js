@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Hotel=require('../modals/Hotel.js');
-const { createHotel, allHotel, findHotel, deleteHotel, updateHotel, countCity, countType } = require('../controlers/hotelmethod.js');
+const { createHotel, allHotel, findHotel, deleteHotel, updateHotel, countCity, countType, gteHotelrooms } = require('../controlers/hotelmethod.js');
 
 
 //create
@@ -28,5 +28,6 @@ router.get('/', allHotel )
 
 router.get('/countcity',countCity);
 router.get('/typecount',countType);
+router.get('/room/:id',gteHotelrooms);
 
 module.exports = router;

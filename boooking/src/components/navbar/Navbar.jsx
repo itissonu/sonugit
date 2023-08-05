@@ -1,6 +1,18 @@
+import { useContext } from "react"
 import "./navbar.css"
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import { AuthContext } from "../../contex/authContex"
 export const Navbar = () => {
+  const navigate=useNavigate()
+  const {user,dispatch} =useContext(AuthContext)
+  const handlelogout =(e)=>{
+    e.preventDefault();
+ 
+  dispatch({ type: "logout" });
+  navigate('/login')
+  }
+  //data.preventDefault();
+ 
   return (
    <div className="navbar">
     <div className="navContainer">
@@ -8,10 +20,10 @@ export const Navbar = () => {
         Boookit.
       </label></Link>
       
-      <div className="navItems">
+     {!user ? <div className="navItems">
         <button className="navButton">Register</button>
         <button className="navButton">Login</button>
-      </div>
+      </div>:<><span style={{fontSize:'26px'}}>{user.username}</span><button onClick={handlelogout} className="logoutButton">Logout</button></>}
     </div>
    </div>
   )

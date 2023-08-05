@@ -18,7 +18,7 @@ useEffect(()=>{
     };
     fetchedata();
 
-},[])
+},[url])
 const refetchedata= async ()=>{
     setLoad(true)   //dataloading started
     try {
@@ -26,6 +26,7 @@ const refetchedata= async ()=>{
         setData(respose.data)
     } catch (error) {
         setErr(error)
+        
     }
    setLoad(false)    //work is done back to normal 
 };

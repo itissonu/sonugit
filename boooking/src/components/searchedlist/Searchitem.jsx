@@ -2,8 +2,11 @@ import React from 'react'
 import './searchedlist.css'
 import { Link } from 'react-router-dom'
 
+
 export const Searchitem = ({item,searchtext}) => {
-  console.log(item.chepeastprice)
+ // console.log(item.chepeastprice)
+ 
+
   return (
     <div>
         <div className='searchitmcont'>

@@ -1,4 +1,5 @@
 const Hotel = require('../modals/Hotel.js');
+const Room = require('../modals/Room.js');
 
 async function createHotel(req,res,next){
     const newHotel =  new Hotel(req.body);  //m created a schema for adding or creating hotel
@@ -88,6 +89,18 @@ async function allHotel(req,res,next){                       //this end point wi
           res.status(500).json({ message: "Internal Server Error" });
         }
       };
+
+      async function gteHotelrooms(req,res,next){
+         try {
+            const hotel=await Hotel.findById(req.params.id);
+            const list= await Promise.all(hotel.rooms.map((room)=>{
+return Room.findById(room)
+            }))
+            res.status(200).json(list)
+         } catch (error) {
+            next(error)
+         }
+      }
       
 module.exports = {
     createHotel,
@@ -97,4 +110,5 @@ module.exports = {
     deleteHotel,
     findHotel,
     allHotel,
+    gteHotelrooms,
   };

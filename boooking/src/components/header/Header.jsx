@@ -18,6 +18,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns"
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from '../../contex/searchContex';
+import { AuthContext } from '../../contex/authContex';
 export const Header = ({typeo}) => {
     const [opendate,setopenDate]=useState(false);
     const [show,showOption]=useState(false);
@@ -59,7 +60,7 @@ navigate("/hotels",{state:{searchtext,options,date}});
         );
     };
   
-  
+    const {user} =useContext(AuthContext)
     return (
         <div className='header'>
             <div className='headContainer'>
@@ -87,7 +88,7 @@ navigate("/hotels",{state:{searchtext,options,date}});
                 </div>
                 { typeo !== "list" &&<><h1 className='headerTitle'>Discover Comfort and Savings in Every Stay</h1>
                 <p className='headerDescription'>Welcome to our luxurious hotel, where comfort meets affordability. Enjoy a lavish stay at our well-appointed rooms and indulge in top-notch amenities. And the best part? Unbelievable discounts await you, making your dream vacation a reality</p>
-                <button className='headerbutton'>Sign in/Register</button>
+               {!user && <button className='headerbutton'>Sign in/Register</button>  }
                 <div className='headersearch'>
                     <div className='headerSearchitem'>
                         <FontAwesomeIcon icon={faBed} />

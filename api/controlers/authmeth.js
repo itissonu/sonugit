@@ -2,6 +2,7 @@ const User = require('../modals/User.js');
 const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
+const createError = require('../rest/error.js');
 
 async function register(req, res,next) {
     const salt = bcrypt.genSaltSync(10)
@@ -23,14 +24,14 @@ async function login(req, res,next) {
     try {
         const usern = await User.findOne({ username: req.body.username });
         if (!usern)
-            return res.status(500).json("user not found")
+            return next(createError(404, "User not found!"));
 
         const userpass = await bcrypt.compare(              //retrive password fron db and compare with client password
             req.body.password,
             usern.password
         );
         if (!userpass)
-            return res.status(500).json("password not matched")
+            return next(createError(400, "password incorrect please try again!!"));
 
 
         const token = jwt.sign({
