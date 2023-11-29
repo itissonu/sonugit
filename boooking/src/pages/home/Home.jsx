@@ -7,6 +7,7 @@ import { Property } from '../../components/propertylist/Property'
 import { Featuredproperty } from '../../components/featureproperty/Featuredproperty'
 import { Maillist } from '../../components/maillist/Maillist'
 import { Footer } from '../../components/footer/Footer'
+import { Banner } from '../../components/banner/Banner'
 
 export const Home = () => {
   return (
@@ -16,6 +17,7 @@ export const Home = () => {
         <div className='homecontainer'>
        
         <Feature/>
+          <Banner offerText="Special Offer: 20% off on Deluxe Rooms!" />
         <h1 className='hometitle'>Browse by property type</h1>
         <Property/>
         <h1 className='hometitle'>Home guest love</h1>

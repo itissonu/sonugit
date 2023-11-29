@@ -48,7 +48,7 @@ export const Resevehotel = ({ setShow, hotelid }) => {
         return dates;
       };
     const alldates = getDatesInRange(date[0].startDate, date[0].endDate);
-    console.log(alldates);
+   // console.log(alldates);
     const isAvailable = (roomNumber) => {
         const isFound = roomNumber.unavailableDates.some((date) =>
         alldates.includes(new Date(date).getTime())

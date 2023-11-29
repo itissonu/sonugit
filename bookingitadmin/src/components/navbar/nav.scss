@@ -1,0 +1,47 @@
+.navbar{
+   
+    height: 58px;
+    border-bottom:0.5px solid rgba(231,238,228) ;
+    align-items: center;
+    font-size: 14px;
+    color: gray;
+    .wrapper{
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        justify-content: space-between;
+        width: 100%;
+        .search{
+            display: flex;
+            align-items: center;
+            border: 0.5px solid lightgray;
+            padding: 3px;
+            .input{
+                border: none;
+                outline: none;
+                background-color: transparent;
+                &::placeholder{
+                    font-size: 12px;
+                }
+            }
+        }
+        .items{
+            display: flex;
+            margin-right: 22px;
+            align-items: center;
+            .item{
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+
+            }
+            .avatar{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+
+            }
+          
+        }
+    }
+}

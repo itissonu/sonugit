@@ -3,6 +3,7 @@ const createError = require("../rest/error.js");
 
 const verifytoken =(req,res,next)=>{
  const token= req.cookies.access_token;
+ console.log("Received token:", token);
  if(!token)
  return next(createError(401, "You are not authenticated!"));
   
@@ -10,7 +11,8 @@ const verifytoken =(req,res,next)=>{
   if(error)
   return next(createError(403, "token is not valid !"));
     req.user=user
-    next();
+  
+   // next();
  });   
 
 }

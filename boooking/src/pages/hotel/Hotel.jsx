@@ -16,6 +16,7 @@ import { Resevehotel } from '../../components/reserve/Resevehotel'
 export const Hotel = () => {
   const location = useLocation()
   const navigate=useNavigate()
+ // console.log(location)
   const hotelid = location.pathname.split('/')[2];    //to find out the location or id of the hotel
   const [show, setShow] = useState(false);
   const [index, setIndex] = useState(0);   //intially 1st element is passed
@@ -27,13 +28,15 @@ export const Hotel = () => {
     setShow(!show);
     setIndex(i);
   }
-  const handledir = (directon) => {
+  const handledir = (direction) => {
     let newindex;
-    if (directon === 'left')
-      index === 0 ? newindex = 8 : newindex -= 1;
-    if (directon === 'right')
-      index === 8 ? newindex = 0 : newindex += 1;
-    setIndex(newindex)
+    if (direction === 'left') {
+      newindex = index === 0 ? data.photos.length - 1 : index - 1;
+    } else if (direction === 'right') {
+      newindex = index === data.photos.length - 1 ? 0 : index + 1;
+    }
+    setIndex(newindex);
+    console.log(newindex)
   }
 
   const Milisec = 1000 * 60 * 60 * 24;   //in a day
